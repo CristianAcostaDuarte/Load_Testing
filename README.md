@@ -402,7 +402,7 @@ The choice of test plan type depends on your specific testing goals and requirem
 
 - After reloading the page .... it didn't work
 
-## 4. Configuring Web app using a container.
+## 6. Configuring Web app using a container.
 
 - Just follow this steps: [Installing hit counter web app](https://github.com/rustudorcalin/hit-counter)!
 
@@ -422,4 +422,18 @@ The choice of test plan type depends on your specific testing goals and requirem
 
   <img width="264" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/61b659ab-5dfa-4c62-97bf-64e4f6db7407">
 
-- d 
+## 7. Use the Jmeter GUI to run the load test.
+
+- Verify your app is up and then press the run button in the Jmeter GUI.
+  
+  <img width="573" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/7cdb9c56-e249-4604-9b2f-551998aadd7f">
+
+- You can view the results of the test in the Listeners -> check the tree listener:
+
+  <img width="550" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/68b8fe70-3d0c-4eb2-8a6a-79fe60d52f6d">
+
+- The counter will be in 11 -> 10 Virtual users and 1 request made by you.
+
+  <img width="228" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/69963b98-d3d0-443a-81b6-b75fa26577b1">
+
+## 8. Use the Jmeter Scripts and docker to run the load test.
