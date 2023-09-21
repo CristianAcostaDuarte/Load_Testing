@@ -174,7 +174,158 @@ The choice of test plan type depends on your specific testing goals and requirem
 
   <img width="674" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/7cc0043e-0bcf-4b5c-8e0a-24c1c9281247">
 
-## 4. Configuring Apache Web server.
+- Our app endpoint will be in localhost:80 -> The VUS will make requests to this endpoint.
+
+  <img width="755" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/35b6ad58-1ae2-4df8-a7cf-beb6f4b20ee0">
+
+##### Add Listeners.
+
+- Add tree listener to see the results of the tests.
+- 
+  <img width="563" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/cc96797f-d220-44ec-a3fe-e955dc2a3f89">
+
+- At the end we have this:
+
+  <img width="738" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/23c74147-40c1-4c21-8124-13936d770ebc">
+
+##### Save the Jmeter test Script:
+- Once you have configured the test plan then you can save the test plan as a script (.jmx file).
+  
+  <img width="291" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/ca64f17f-61bc-4be5-863c-cc7668b6667c">
+
+- The previous configuration will be saved as:
+
+```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">80</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <boolProp name="HTTPSampler.md5">false</boolProp>
+          <intProp name="HTTPSampler.ipSourceType">0</intProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
+```
+
+  
+
+## 4. Configuring Apache Web server (Didn't work).
 
 - Here we want to run a static web app that increase the count every time the user goes to the URL.
   
@@ -214,5 +365,61 @@ The choice of test plan type depends on your specific testing goals and requirem
 
 ## 5. Configuring the web app.
 
-- What i did was install VIM in the container and then copy this 
+- What i did was install VIM in the container and then copy this html into the index.html file:
 
+``` html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Counter</title>
+</head>
+<body>
+    <h1>Welcome to the Visit Counter App!</h1>
+    <p>This page has been visited <span id="counter">0</span> times.</p>
+
+    <script>
+        // Function to increment and update the visit counter
+        function incrementCounter() {
+            let counterElement = document.getElementById('counter');
+            let currentCount = parseInt(counterElement.textContent);
+            counterElement.textContent = currentCount + 1;
+        }
+
+        // Call the incrementCounter function when the page loads
+        window.onload = function() {
+            incrementCounter();
+        }
+    </script>
+</body>
+</html>
+
+```
+- You will get this:
+  
+  <img width="407" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/9d734995-0352-41cd-80f9-afc80e2b86f6">
+
+- After reloading the page .... it didn't work
+
+## 4. Configuring Web app using a container.
+
+- Just follow this steps: [Installing hit counter web app](https://github.com/rustudorcalin/hit-counter)!
+
+- If we use localhost:80 then the counter will increase:
+
+  <img width="287" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/623332d8-8193-449f-9214-5a08ca8bd579">
+
+- If you stop the counter then obviously the app will disapear:
+  
+  <img width="410" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/a923245a-f3dd-4ff3-877a-d2226a1d6fae">
+
+- If you start again the ocntainer then we will continue with the current count:
+
+  <img width="292" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/de6f9bba-a9fc-45bf-8dbd-c1ddd173e800">
+
+- If you delete the container and start it again then the count will be restarted:
+
+  <img width="264" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/61b659ab-5dfa-4c62-97bf-64e4f6db7407">
+
+- d 
