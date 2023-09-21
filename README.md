@@ -437,3 +437,20 @@ The choice of test plan type depends on your specific testing goals and requirem
   <img width="228" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/69963b98-d3d0-443a-81b6-b75fa26577b1">
 
 ## 8. Use the Jmeter Scripts and docker to run the load test.
+
+- We are going to change the Test plan -> change the VU to 1 and change the http server name to www.google.com, the reason behind this is because localhost:80 in the previous test plan is the conatiner's localhost (in order to use the app we need to assign a public IP to it and then perform the test to it)
+  
+- Save the Test plan file -> simple_load_test-jmx
+
+- Now run the command in the CLI:
+
+``` shell
+  docker run -v local_file_path:/workspace justb4/jmeter -n -t /workspace/simple_load_test.jmx  -l /workspace/resuls.jtl
+```
+
+- Here we create a volume in our container that maps the local_file_path where our simple_load_test.jmx is located to a workspace folder that will be created in the container, ** justb4/jmeter -n -t /workspace/simple_load_test.jmx  -l /workspace/resuls.jtl ** is used to run jmeter without GUI, run the script simple_load_test.jmx and save the results of the test plan in the workspace folder through results.jtl.
+  
+- The next image is the test running, here we can see that the test was perfomed successfully:
+
+  <img width="888" alt="image" src="https://github.com/CristianAcostaDuarte/Load_Testing/assets/101611537/c49d088e-a421-422e-beb7-380c40f988fa">
+
